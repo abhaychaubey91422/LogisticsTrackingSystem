@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Shipment Dashboard</h1>
+        <p>Total Shipments: <strong th:text="${totalShipments}"></strong></p>
+        
+        <table border="1">
+            <tr>
+                <th>Shipment ID</th>
+                <th>Customer</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            <tr th:each="shipment : ${shipments}">
+                <td th:text="${shipment.shipmentId}"></td>
+                <td th:text="${shipment.customerName}"></td>
+                <td th:text="${shipment.origin}"></td>
+                <td th:text="${shipment.destination}"></td>
+                <td th:text="${shipment.status}"></td>
+                <td>
+                    <a th:href="@{/updateStatus/{id}(id=${shipment.shipmentId})}">Update Status</a> |
+                    <a th:href="@{/addTrackingForm/{id}(id=${shipment.shipmentId})}">Add Tracking</a> |
+                    <a th:href="@{/deleteShipment/{id}(id=${shipment.id})}" onclick="return confirm('Delete?')">Delete</a>
+                </td>
+            </tr>
+        </table>
+        
+        <br>
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

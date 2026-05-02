@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Vehicle Status</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ Update Vehicle Status</h1>
+        
+        <form action="/updateVehicleStatus" method="post">
+            <input type="hidden" name="vehicleNumber" th:value="${vehicle.vehicleNumber}">
+            
+            <label>Vehicle: <strong th:text="${vehicle.vehicleNumber}"></strong></label><br>
+            <label>Driver: <strong th:text="${vehicle.driverName}"></strong></label><br><br>
+            
+            <label>New Status:</label>
+            <select name="status">
+                <option value="AVAILABLE">AVAILABLE</option>
+                <option value="ON_TRIP">ON_TRIP</option>
+                <option value="MAINTENANCE">MAINTENANCE</option>
+            </select><br>
+            
+            <button type="submit">Update</button>
+        </form>
+        
+        <br>
+        <a href="/vehicles">← Back to Vehicles</a>
+    </div>
+</body>
+</html>

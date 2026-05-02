@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicles</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚛 Vehicle Management</h1>
+        
+        <table border="1">
+            <tr>
+                <th>Vehicle Number</th>
+                <th>Driver Name</th>
+                <th>Driver Phone</th>
+                <th>Status</th>
+                <th>Current Location</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="vehicle : ${vehicles}">
+                <td th:text="${vehicle.vehicleNumber}"></td>
+                <td th:text="${vehicle.driverName}"></td>
+                <td th:text="${vehicle.driverPhone}"></td>
+                <td th:text="${vehicle.status}"></td>
+                <td th:text="${vehicle.currentLocation}"></td>
+                <td>
+                    <a th:href="@{/updateVehicleStatus/{num}(num=${vehicle.vehicleNumber})}">Update Status</a>
+                </td>
+            </tr>
+        </table>
+        
+        <br>
+        <a href="/addVehicleForm">➕ Add New Vehicle</a><br>
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

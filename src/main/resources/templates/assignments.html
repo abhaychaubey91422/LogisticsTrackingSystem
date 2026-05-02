@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle Assignments</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚛 Vehicle Assignments</h1>
+        
+        <a href="/assignForm" class="btn">➕ New Assignment</a>
+        <a href="/dashboard" class="btn">← Back to Dashboard</a>
+        
+        <br><br>
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Shipment ID</th>
+                    <th>Vehicle Number</th>
+                    <th>Assigned Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="assignment : ${assignments}">
+                    <td th:text="${assignment.id}"></td>
+                    <td th:text="${assignment.shipmentId}"></td>
+                    <td th:text="${assignment.vehicleNumber}"></td>
+                    <td th:text="${assignment.assignedDate}"></td>
+                    <td>
+                        <span th:if="${assignment.status == 'ACTIVE'}" style="color: green;">✅ ACTIVE</span>
+                        <span th:if="${assignment.status == 'COMPLETED'}" style="color: blue;">✔️ COMPLETED</span>
+                    </td>
+                    <td>
+                        <a th:if="${assignment.status == 'ACTIVE'}" 
+                           th:href="@{/completeAssignment/{id}(id=${assignment.id})}"
+                           onclick="return confirm('Mark as completed?')">
+                           ✅ Complete
+                        </a>
+                        <a th:href="@{/deleteAssignment/{id}(id=${assignment.id})}"
+                           onclick="return confirm('Delete assignment?')">
+                           🗑️ Delete
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div th:if="${assignments.empty}">
+            <p style="color: orange;">No assignments yet. Click "New Assignment" to assign vehicle to shipment.</p>
+        </div>
+    </div>
+</body>
+</html>

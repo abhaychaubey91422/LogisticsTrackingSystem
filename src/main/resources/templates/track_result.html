@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tracking Result</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📍 Shipment Status</h1>
+        
+        <div th:if="${shipment != null}">
+            <h3>Shipment ID: <span th:text="${shipment.shipmentId}"></span></h3>
+            <p>Customer: <span th:text="${shipment.customerName}"></span></p>
+            <p>From: <span th:text="${shipment.origin}"></span> → To: <span th:text="${shipment.destination}"></span></p>
+            <p>Current Status: <strong th:text="${shipment.status}"></strong></p>
+        </div>
+        
+        <div th:if="${shipment == null}">
+            <p style="color:red">❌ Shipment not found!</p>
+        </div>
+        
+        <h3>📋 Tracking History</h3>
+        <table border="1">
+            <tr>
+                <th>Timestamp</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Remarks</th>
+            </tr>
+            <tr th:each="track : ${trackingHistory}">
+                <td th:text="${track.timestamp}"></td>
+                <td th:text="${track.location}"></td>
+                <td th:text="${track.status}"></td>
+                <td th:text="${track.remarks}"></td>
+            </tr>
+        </table>
+        
+        <br>
+        <a href="/track">← Track Another</a> | <a href="/">Home</a>
+    </div>
+</body>
+</html>

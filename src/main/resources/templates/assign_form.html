@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Vehicle to Shipment</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🚛 Assign Vehicle to Shipment</h1>
+        
+        <form action="/assignVehicle" method="post">
+            <label>Select Shipment:</label>
+            <select name="shipmentId" required>
+                <option value="">-- Select Shipment --</option>
+                <option th:each="shipment : ${shipments}" 
+                        th:value="${shipment.shipmentId}"
+                        th:text="${shipment.shipmentId} + ' - ' + ${shipment.customerName} + ' (' + ${shipment.origin} + ' → ' + ${shipment.destination} + ')'">
+                </option>
+            </select>
+            
+            <label>Select Vehicle:</label>
+            <select name="vehicleNumber" required>
+                <option value="">-- Select Vehicle --</option>
+                <option th:each="vehicle : ${vehicles}" 
+                        th:value="${vehicle.vehicleNumber}"
+                        th:text="${vehicle.vehicleNumber} + ' - ' + ${vehicle.driverName} + ' (' + ${vehicle.currentLocation} + ')'">
+                </option>
+            </select>
+            
+            <button type="submit">Assign Vehicle</button>
+        </form>
+        
+        <br>
+        <a href="/assignments">← Back to Assignments</a>
+    </div>
+</body>
+</html>
